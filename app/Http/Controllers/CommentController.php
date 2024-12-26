@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -17,9 +18,13 @@ class CommentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request, int $articleId)
     {
-        //
+        $data = $request->validate([
+            "content"=>"required|string"
+        ]);
+        Comment::create(array_merge($data, [$articleId]));
+        return redirect()->back();
     }
 
     /**

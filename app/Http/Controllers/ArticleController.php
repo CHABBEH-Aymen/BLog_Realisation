@@ -22,17 +22,15 @@ class ArticleController extends Controller
      */
     public function create(Request $request): RedirectResponse
     {
-        $Articledata = $request->validate([
+        $data = $request->validate([
             "title"=>"required|string|max:255",
             "content"=>"required|string",
-            "category_id"=>"required|integer",
-            "user_id"=>Auth::user()->id
+            "category_id"=>"required|integer"
         ]);
-        $tagsData = $request->validate([
-            "tag"=>""
-        ]);
-        $articel = Article::create($Articledata);
-        $articel->attach();
+        $data["user_id"] = Auth::user()->id;
+        $articel = Article::create($data);
+        if($request->has("tags")) $articel->tag()->attach($request->tags);
+
         return redirect()->back();
     }
 

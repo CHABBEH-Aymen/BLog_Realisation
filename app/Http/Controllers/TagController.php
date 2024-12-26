@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -17,9 +18,13 @@ class TagController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $data = $request->validate([
+            "name"=>"required|string|max:255"
+        ]);
+        Tag::create($data);
+        return redirect()->back();
     }
 
     /**
