@@ -26,4 +26,8 @@ class Article extends Model
     {
       return $this->morphMany(Comment::class, 'commentable');
     }
+
+    function tag(){
+        return $this->hasMany(Tag::class);
+    }
 }
