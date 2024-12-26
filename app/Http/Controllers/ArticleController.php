@@ -55,14 +55,18 @@ class ArticleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //git worktree list
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $article->delete();
+        
+        return redirect('admin.article.index')->with('success' , 'delete successed');
     }
 }
