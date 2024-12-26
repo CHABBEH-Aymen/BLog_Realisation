@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Admin as A
+actor Visitor as V
+
+package "BlogArticle" {
+    usecase "CRUD Article" as UC1
+    usecase "view Articles" as UC2
+    usecase "gerer Commentaires" as UC3
+    usecase "gerer Categories" as UC4
+    usecase "Ajouter Commentaire" as UC5
+    usecase "gerer Tags" as UC6
+}
+
+A -- UC1
+A -- UC3
+A -- UC4
+A -- UC6
+V -- UC2
+V -- UC5
+
+@enduml
