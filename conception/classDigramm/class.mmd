@@ -1,0 +1,34 @@
+classDiagram
+    class User {
+        +id
+        +name
+        +email
+        +password
+    }
+
+    class Article {
+        +id
+        +title
+        +content
+    }
+
+    class Category {
+        +id
+        +name
+    }
+
+    class Tag {
+        +id
+        +name
+    }
+
+    class Comment {
+        +id
+        +content
+    }
+
+
+User "1" -- "0..*" Article 
+Category "1" -- "0..*" Article 
+User "1" -- "0..*" Comment
+Article "1..*" -- "1..*" Tag
