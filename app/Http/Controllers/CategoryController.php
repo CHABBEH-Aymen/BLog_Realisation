@@ -56,17 +56,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $data = $request->validate([
+            "name"=>"required|string|max:255"
+        ]);
+        $category->name = $data["name"];
+        return redirect()->back(); 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $article = Category::findOrFail($id);
-        $article->delete();
-        
-        return redirect('admin.category.index')->with('success' , 'delete successed');
+        //
     }
 }

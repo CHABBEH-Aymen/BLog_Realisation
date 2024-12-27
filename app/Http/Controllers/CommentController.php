@@ -41,16 +41,46 @@ class CommentController extends Controller
 
         return redirect()->route('articles.index', $articleId)->with('success', 'Comment added successfully!');
       }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $comment = Comment::findOrFail($id);
+        $data = $request->validate([
+            "content"=>"required|string"
+        ]);
+        $comment->content = $data["content"];
+        return redirect()->back();
+    }
+
     /**
      * Remove the specified resource from storage.
 
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
         $article = Comment::findOrFail($id);
         $article->delete();
         
-        return redirect('admin.comment.index')->with('success' , 'delete successed'); ArticleView
+        return redirect('admin.comment.index')->with('success' , 'delete successed');
     }
 
 }
