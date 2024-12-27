@@ -27,11 +27,16 @@ class ArticleController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        return view('admin.article.create');
+        $data = $request->validate([
+            "title"=>"required|string|max:255",
+            "content"=>"required|string",
+        ]); 
+        $data["user_id"] = Auth::user()->getAuthIdentifier();
+        $article = Article::creat($data);
+        if($request->has('tags')) $article->tag->attach($request->tags);
+        return redirect()->back();
     }
-
-
-
+    
     /**
      * Display the specified resource.
      */
@@ -61,7 +66,6 @@ class ArticleController extends Controller
         $article->title = $data["title"];
         $article->content = $data["content"];
         return redirect()->back();
-
     }
 
     /**
