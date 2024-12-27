@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ArticleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,3 +20,7 @@ Route::middleware("auth")->group(function () {
 Route::middleware(['permission:add comment'])->group(function() {
     Route::get('/comments' , [App\Http\Controllers\CommentController::class, 'index'])->name('comments');
 });
+
+//public
+// Route::view('/public', 'public.home');
+

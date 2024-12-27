@@ -33,8 +33,6 @@ class CommentController extends Controller
             'content' => 'required|string|max:500',
         ]);
 
-
-
         // créer un nouveau commentaire
         $comment = new Comment();
         $comment->content = $data['content'];
@@ -42,5 +40,16 @@ class CommentController extends Controller
         $comment->save();
 
         return redirect()->route('articles.index', $articleId)->with('success', 'Comment added successfully!');
-    }
+      }
+    /**
+     * Remove the specified resource from storage.
+    */
+    public function destroy($id)
+      {
+        $article = Comment::findOrFail($id);
+        $article->delete();
+        
+        return redirect('admin.comment.index')->with('success' , 'delete successed');
+
+      }
 }
