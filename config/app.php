@@ -124,7 +124,8 @@ return [
     ],
 
     'aliases' => [
-        'Permission' => Spatie\Permission\Facades\Permission::class,
+        // 'Permission' => Spatie\Permission\Facades\Permission::class,
+        // 'Route' => Illuminate\Support\Facades\Route::class,
     ],
     
 ];
