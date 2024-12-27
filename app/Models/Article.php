@@ -7,13 +7,28 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Article extends Model
 {
+  protected $fillable = ['title', 'content', 'user_id', 'category_id'];
 
     /**
      * @Relation: Article belongs to a user 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    function user(): BelongsTo
+    public function user()
     {
-        return $this->belongsTo(User::class);
+      return $this->belongsTo(User::class);
+    }
+
+    public function category()
+    {
+      return $this->belongsTo(Category::class);
+    }
+    
+    public function comments()
+    {
+      return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    function tag(){
+        return $this->hasMany(Tag::class);
     }
 }

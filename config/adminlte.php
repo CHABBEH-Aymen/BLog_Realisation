@@ -306,7 +306,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Create Article',
-                    'url' => '#',
+                    'route'=>'article.create',
                 ],
                 [
                     'text' => 'Articles Listes',
