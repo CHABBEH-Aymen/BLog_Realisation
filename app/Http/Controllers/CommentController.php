@@ -75,12 +75,12 @@ class CommentController extends Controller
      * Remove the specified resource from storage.
 
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
         $article = Comment::findOrFail($id);
         $article->delete();
         
-        return redirect('admin.comment.index')->with('success' , 'delete successed'); ArticleView
+        return redirect('admin.comment.index')->with('success' , 'delete successed');
     }
 
 }

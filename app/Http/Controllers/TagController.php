@@ -67,11 +67,8 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $article = Tag::findOrFail($id);
-        $article->delete();
-        
-        return redirect('admin.tag.index')->with('success' , 'delete successed');
+        //
     }
 }

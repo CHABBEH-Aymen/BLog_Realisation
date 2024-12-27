@@ -67,11 +67,8 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $article = Article::findOrFail($id);
-        $article->delete();
-        
-        return redirect('admin.article.index')->with('success' , 'delete successed');
+        //
     }
 }
