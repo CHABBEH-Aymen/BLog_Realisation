@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ArticleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,3 +16,5 @@ Route::middleware("auth")->group(function () {
         return view('dashboard');
     })->name("dashboard");
 });
+//public
+Route::view('/public', 'public.home');
