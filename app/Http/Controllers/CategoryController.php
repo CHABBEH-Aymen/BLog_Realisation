@@ -56,7 +56,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $data = $request->validate([
+            "name"=>"required|string|max:255"
+        ]);
+        $category->name = $data["name"];
+        return redirect()->back(); 
     }
 
     /**

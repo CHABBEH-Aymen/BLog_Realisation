@@ -56,7 +56,12 @@ class CommentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $data = $request->validate([
+            "content"=>"required|string"
+        ]);
+        $comment->content = $data["content"];
+        return redirect()->back();
     }
 
     /**
