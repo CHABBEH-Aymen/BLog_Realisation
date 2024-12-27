@@ -16,5 +16,11 @@ Route::middleware("auth")->group(function () {
         return view('dashboard');
     })->name("dashboard");
 });
+
+Route::middleware(['permission:add comment'])->group(function() {
+    Route::get('/comments' , [App\Http\Controllers\CommentController::class, 'index'])->name('comments');
+});
+
 //public
-Route::view('/public', 'public.home');
+// Route::view('/public', 'public.home');
+
