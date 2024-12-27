@@ -17,6 +17,10 @@ Route::middleware("auth")->group(function () {
     })->name("dashboard");
 });
 
+// create article
+Route::get('/articles/create', [ArticleController::class, 'create'])->name('article.create');
+
+
 Route::middleware(['permission:add comment'])->group(function() {
     Route::get('/comments' , [App\Http\Controllers\CommentController::class, 'index'])->name('comments');
 });
