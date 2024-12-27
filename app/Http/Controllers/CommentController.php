@@ -3,70 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Article;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Facades\Permission as PermissionFacade;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $comments = Comment::all();
+        return view('comment.index', compact('comments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(Request $request, int $articleId)
+    public function create(int $articleId)
     {
+        
+    }
+
+    public function store(Request $request, int $articleId)
+    {
+        // Vérifie si l'utilisateur a le droit d'ajouter des commentaires
+        if (!auth()->user()->can('add comments')) {
+            abort(403, 'You do not have permission to add comments.');
+        }
+
+        // valider les données du formulaire
         $data = $request->validate([
-            "content"=>"required|string"
+            'content' => 'required|string|max:500',
         ]);
-        Comment::create(array_merge($data, [$articleId]));
-        return redirect()->back();
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // créer un nouveau commentaire
+        $comment = new Comment();
+        $comment->content = $data['content'];
+        $comment->user_id = auth()->id();
+        $comment->save();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
+        return redirect()->route('articles.index', $articleId)->with('success', 'Comment added successfully!');
+      }
     /**
      * Remove the specified resource from storage.
+
      */
     public function destroy($id)
     {
         $article = Comment::findOrFail($id);
         $article->delete();
         
-        return redirect('admin.comment.index')->with('success' , 'delete successed');
+        return redirect('admin.comment.index')->with('success' , 'delete successed'); ArticleView
     }
+
 }

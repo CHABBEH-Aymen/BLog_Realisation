@@ -407,6 +407,7 @@
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
             'reference' => '5ae0b37a0a5a3a2cbab892ccd7751ff720a2aaf7',
+
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
