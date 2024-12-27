@@ -20,11 +20,7 @@ class CategoryController extends Controller
      */
     public function create(Request $request)
     {
-        $data = $request->validate([
-            "name"=>"required|string|max:255"
-        ]);
-        Category::create($data);
-        return redirect()->back();
+        //
     }
 
     /**
@@ -32,7 +28,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            "name"=>"required|string|max:255"
+        ]);
+        Category::create($data);
+        return redirect()->back();
     }
 
     /**
