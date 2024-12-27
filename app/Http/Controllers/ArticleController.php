@@ -17,10 +17,13 @@ class ArticleController extends Controller
         //
     }
 
-    /**
-     * Creating a new resource.
-     */
-    public function create(Request $request): RedirectResponse
+
+    public function create()
+    {
+        return view('article.create');
+    }
+
+    public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
             "title"=>"required|string|max:255",
@@ -33,6 +36,8 @@ class ArticleController extends Controller
 
         return redirect()->back();
     }
+
+
 
     /**
      * Display the specified resource.
