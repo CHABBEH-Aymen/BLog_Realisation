@@ -16,5 +16,8 @@ Route::middleware("auth")->group(function () {
         return view('dashboard');
     })->name("dashboard");
 });
+// create article
+Route::get('/articles/create', [ArticleController::class, 'create'])->name('article.create');
+
 //public
 Route::view('/public', 'public.home');

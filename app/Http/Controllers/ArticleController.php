@@ -20,18 +20,9 @@ class ArticleController extends Controller
     /**
      * Creating a new resource.
      */
-    public function create(Request $request): RedirectResponse
+    public function create()
     {
-        $data = $request->validate([
-            "title"=>"required|string|max:255",
-            "content"=>"required|string",
-            "category_id"=>"required|integer"
-        ]);
-        $data["user_id"] = Auth::user()->id;
-        $articel = Article::create($data);
-        if($request->has("tags")) $articel->tag()->attach($request->tags);
-
-        return redirect()->back();
+        return view('admin.article.create');
     }
 
     /**
