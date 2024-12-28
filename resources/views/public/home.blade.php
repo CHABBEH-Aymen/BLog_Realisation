@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tailwind CSS Test</title>
   <!-- Include Tailwind CSS -->
-  <link href="resources/css/app.css" rel="stylesheet">
+  @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
   <!-- Header -->
   <header class="w-full bg-blue-600 text-white p-4 shadow">
     <div class="container mx-auto text-center">
-      <h1 class="text-2xl font-bold">Welcome to Tailwind CSS</h1>
+      <h1 class="text-2xl text-blue-500 font-bold">Welcome to Tailwind CSS</h1>
     </div>
   </header>
 
