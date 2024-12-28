@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ArticleController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('public.home');
 });
 
 Auth::routes();
