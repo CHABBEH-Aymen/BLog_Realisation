@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Article extends Model
 {
+  protected $fillable = ['title', 'content', 'user_id', 'category_id'];
 
     /**
      * @Relation: Article belongs to a user 
