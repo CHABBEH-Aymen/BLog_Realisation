@@ -2,17 +2,12 @@
 
 @section('title', 'Create Article')
 
-@section('content_header')
-    <h1>Create New Article</h1>
-@stop
+
 
 @section('content')
 <div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Article Form</h3>
-    </div>
-    <div class="card-body">
-        <form action="{{ route('articles.store') }}" method="POST">
+    <div class="card-body mt-8">
+        <form action="{{route('articles.store')}}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="title">Title</label>

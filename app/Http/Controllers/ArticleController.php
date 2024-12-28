@@ -22,7 +22,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('article.create');
+        return view('admin.article.create');
     }
 
     public function store(Request $request): RedirectResponse
@@ -30,11 +30,16 @@ class ArticleController extends Controller
         $data = $request->validate([
             "title"=>"required|string|max:255",
             "content"=>"required|string",
-        ]); 
-        $data["user_id"] = Auth::user()->getAuthIdentifier();
-        $article = Article::creat($data);
-        if($request->has('tags')) $article->tag->attach($request->tags);
-        return redirect()->back();
+            'user_id' => 'required|exists:users,id',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+        Article::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'user_id' => $request->user_id,
+            'category_id' => $request->category_id,
+        ]);
+        return redirect()->route('article.create')->with('success', 'Article created successfully!');
     }
     
     /**
