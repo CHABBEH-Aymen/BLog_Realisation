@@ -17,7 +17,9 @@ class ArticleController extends Controller
         //
     }
 
-
+    /**
+     * Creating a new resource.
+     */
     public function create()
     {
         return view('article.create');
@@ -28,17 +30,13 @@ class ArticleController extends Controller
         $data = $request->validate([
             "title"=>"required|string|max:255",
             "content"=>"required|string",
-            "category_id"=>"required|integer"
-        ]);
-        $data["user_id"] = Auth::user()->id;
-        $articel = Article::create($data);
-        if($request->has("tags")) $articel->tag()->attach($request->tags);
-
+        ]); 
+        $data["user_id"] = Auth::user()->getAuthIdentifier();
+        $article = Article::creat($data);
+        if($request->has('tags')) $article->tag->attach($request->tags);
         return redirect()->back();
     }
-
-
-
+    
     /**
      * Display the specified resource.
      */
@@ -60,18 +58,21 @@ class ArticleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //git worktree list
-
+        $article = Article::findOrFail($id);
+        $data = $request->validate([
+            "title"=>"required|string|max:255",
+            "content"=>"required|string",
+        ]); 
+        $article->title = $data["title"];
+        $article->content = $data["content"];
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $article = Article::findOrFail($id);
-        $article->delete();
-        
-        return redirect('admin.article.index')->with('success' , 'delete successed');
+        //
     }
 }

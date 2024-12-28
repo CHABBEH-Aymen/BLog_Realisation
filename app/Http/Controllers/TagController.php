@@ -56,17 +56,19 @@ class TagController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $tag = Tag::findOrFail($id);
+        $data = $request->validate([
+            "name"=>"required|string|max:255"
+        ]);
+        $tag->name = $data["name"];
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $article = Tag::findOrFail($id);
-        $article->delete();
-        
-        return redirect('admin.tag.index')->with('success' , 'delete successed');
+        //
     }
 }
