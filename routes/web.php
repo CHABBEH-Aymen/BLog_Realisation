@@ -5,9 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('public.home');
 });
 
 Auth::routes();
@@ -43,6 +42,4 @@ Route::get('/comments' , [App\Http\Controllers\CommentController::class, 'index'
 // create article
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('article.create');
 Route::post('/articles/create', [ArticleController::class, 'store'])->name('articles.store');
-
-
 
