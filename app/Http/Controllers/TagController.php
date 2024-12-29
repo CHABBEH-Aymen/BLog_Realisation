@@ -12,19 +12,16 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        return view('admin.tag.list', compact('tags'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create()
     {
-        $data = $request->validate([
-            "name"=>"required|string|max:255"
-        ]);
-        Tag::create($data);
-        return redirect()->back();
+        return view('admin.tag.create');
     }
 
     /**
@@ -32,7 +29,11 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            "name"=>"required|string|max:255"
+        ]);
+        Tag::create($data);
+        return redirect()->back();
     }
 
     /**
@@ -46,10 +47,12 @@ class TagController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function edit($id)
+{
+    $tag = Tag::findOrFail($id);
+    return view('admin.tag.edit', compact('tag'));
+}
+
 
     /**
      * Update the specified resource in storage.
@@ -67,8 +70,11 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
-    }
+    public function destroy($id)
+{
+    $tag = Tag::findOrFail($id);
+    $tag->delete();
+
+    return redirect()->route('tags.index')->with('success', 'Tag deleted successfully.');
+}
 }

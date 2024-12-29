@@ -12,15 +12,16 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('admin.category.list' , compact('categories'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create()
     {
-        //
+        return view('admin.category.create');
     }
 
     /**
@@ -32,7 +33,7 @@ class CategoryController extends Controller
             "name"=>"required|string|max:255"
         ]);
         Category::create($data);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Category created successfully');
     }
 
     /**
@@ -67,8 +68,11 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
-    }
+    public function destroy($id)
+{
+    $category = Category::findOrFail($id);
+    $category->delete();
+
+    return redirect()->route('categories.index')->with('success', 'Category deleted successfully');
+}
 }
