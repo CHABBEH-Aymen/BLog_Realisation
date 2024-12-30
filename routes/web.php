@@ -14,10 +14,12 @@ Route::middleware("auth")->group(function () {
     Route::get("dashboard", function () {
         return view('dashboard');
     })->name("dashboard");
+    Route::resource('articles', ArticleController::class);
+
 });
 
-// create article
-Route::get('/articles/create', [ArticleController::class, 'create'])->name('article.create');
+
+Route::get('/articles/index', [ArticleController::class, 'index'])->name('article.index');
 
 
 Route::middleware(['permission:add comment'])->group(function() {
