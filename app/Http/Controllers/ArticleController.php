@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +27,7 @@ class ArticleController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $data = $raquest->validate([
+        $data = $request->validate([
             'title' => 'required|string|max:100',
             'content' => 'required|string|max:500',
             'category' => 'required',
@@ -60,7 +62,7 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
         
-        $data = $raquest->validate([
+        $data = $request->validate([
             'title' => 'required|string|max:100',
             'content' => 'required|string|max:500',
             'category' => 'required',
@@ -68,19 +70,13 @@ class ArticleController extends Controller
             'tags.*' => 'exists:tags,id'
         ]);
 
-        $article->update($data)([
-            'title' => $valideted['title'],
-            'content' => $valideted['content'],
-            'category_id' => $valideted['category'],
-        ]);
-
+        $article->update($data);
         $article->tags()->sync($request->tags);
-
         return redirect()->route('article.index')->with('message' , 'Article updated successfully');
     }
 
 
-    public function destroy(Article $article)
+    public function destroy(Article $article, $id)
     {
         $article = Article::find($id);
         $article->delete();
