@@ -30,9 +30,9 @@
                         <td>{{ $tag->name }}</td>
                         <td>
                             <!-- Add action buttons (Edit, Delete, etc.) -->
-                            <a href="{{ route('tags.edit', $tag->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                            {{-- <a href="{{ route('tags.edit', $tag->id) }}" class="btn btn-primary btn-sm">Edit</a> --}}
                             <!-- Delete action (can be added later) -->
-                            <form action="{{ route('tags.list', $tag->id) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('tag.delete', $tag->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>

@@ -320,11 +320,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'Create Category',
-                    'route'=>'category.create',
+                    'url' => '#',
                 ],
                 [
                     'text' => 'Categories Listes',
-                    'route'=>'category.list',
+                    'url' => '#',
                 ],
             ],
         ],
@@ -338,7 +338,7 @@ return [
                 ],
                 [
                     'text' => 'Tags Listes',
-                    'route'=>'tag.list',
+                    'route'=>'tag.index',
                 ],
             ],
         ],

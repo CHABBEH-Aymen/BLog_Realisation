@@ -7,7 +7,7 @@
 @section('content')
 <div class="card mt-5">
     <div class="card-body mt-8">
-        <form action="{{route('tags.store')}}" method="POST">
+        <form action="{{route('tag.store')}}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="title">Name</label>
