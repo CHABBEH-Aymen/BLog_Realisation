@@ -2,12 +2,15 @@
 
 @section('title', 'Create Article')
 
-
-
+@section('content_header')
+    <h1>Create New Article</h1>
 @section('content')
 <div class="card">
-    <div class="card-body mt-8">
-        <form action="{{route('articles.store')}}" method="POST">
+    <div class="card-header">
+        <h3 class="card-title">Ajouter Article</h3>
+    </div>
+    <div class="card-body">
+        <form action="{{ route('articles.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="title">Title</label>
@@ -18,20 +21,28 @@
                 <textarea name="content" id="content" class="form-control" rows="5" placeholder="Enter content" required></textarea>
             </div>
             <div class="form-group">
-                <label for="category">Category</label>
+                <label for="category">Categories</label>
                 <select name="category" id="category" class="form-control">
-                    <option value="">Select Category</option>
-                    <!-- Add categories dynamically -->
-                    <option value="1">Category 1</option>
-                    <option value="2">Category 2</option>
+                    @foreach ($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
                 </select>
             </div>
-            <div class="form-group">
-                <label for="tags">Tags</label>
-                <input type="text" name="tags" id="tags" class="form-control" placeholder="Enter tags">
+
+            <div class="mt-5">
+                <label for="tags" class="form-label">Sélectionnez les tags :</label>
+                <select id="tags" name="tags[]" class="form-select" multiple>
+                    @foreach ($tags as $tag)
+                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                    @endforeach
+                </select>
             </div>
-            <button type="submit" class="btn btn-primary">Create Article</button>
-        </form>
-    </div>
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </div>
+    </form>
 </div>
-@stop
+
+@endsection
