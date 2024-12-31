@@ -4,10 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('public.home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home'); // Home page for public users
 
 Auth::routes();
 
@@ -27,7 +26,7 @@ Route::middleware("auth")->group(function () {
     
     // only admin should create articles
     //create
-    Route::get('/articles/create', [ArticleController::class, 'create'])
+    Route::get('/artices/create', [ArticleController::class, 'create'])
     ->name('article.create')
     ->middleware("role:admin");
     //store
@@ -42,4 +41,8 @@ Route::get('/comments' , [App\Http\Controllers\CommentController::class, 'index'
 // create article
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('article.create');
 Route::post('/articles/create', [ArticleController::class, 'store'])->name('articles.store');
+
+// Public article routes using HomeController
+Route::get('/articles', [HomeController::class, 'index'])->name('articles.index'); 
+Route::get('/articles/{id}', [HomeController::class, 'show'])->name('articles.show'); 
 
