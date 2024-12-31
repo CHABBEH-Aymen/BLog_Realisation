@@ -50,4 +50,7 @@ Route::post('/tag/create', [TagController::class, 'store'])->name('tag.store');
 //show tags
 Route::get('/tag/list',[TagController::class,'index'])->name('tag.index');
 //delete tag
-Route::delete('/tag/{id}/delete',[TagController::class,'destroy'])->name('tag.delete');
+Route::delete('/tag/{id}/delete',action: [TagController::class,'destroy'])->name('tag.delete');
+//edit tag
+Route::get('/tag/{id}/edit',[TagController::class,'edit'])->name('tag.edit');
+Route::put('/tag/{id}/edit',[TagController::class,'update'])->name('tag.update');

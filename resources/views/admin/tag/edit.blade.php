@@ -19,7 +19,8 @@
         @endif
 
         <!-- Edit Form -->
-        <form action="{{ route('tags.update', $tag->id) }}" method="POST">
+        <form action="{{ route('tag.update', $tag->id) }}" method="POST">
+            
             @csrf
             @method('PUT')
             
@@ -29,7 +30,7 @@
             </div>
 
             <button type="submit" class="btn btn-success">Update Tag</button>
-            <a href="{{ route('tags.index') }}" class="btn btn-secondary">Back</a>
+            {{-- <a href="{{ route('tags.index') }}" class="btn btn-secondary">Back</a> --}}
         </form>
     </div>
 </div>

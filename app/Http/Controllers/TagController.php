@@ -64,7 +64,7 @@ class TagController extends Controller
             "name"=>"required|string|max:255"
         ]);
         $tag->name = $data["name"];
-        return redirect()->back();
+        return redirect('/tag/list')->with('success','Tag updated successfully');
     }
 
     /**
@@ -75,6 +75,6 @@ class TagController extends Controller
     $tag = Tag::findOrFail($id);
     $tag->delete();
 
-    return redirect()->route('tags.index')->with('success', 'Tag deleted successfully.');
+    return redirect('/tag/list')->with('success', 'Tag deleted successfully.');
 }
 }
