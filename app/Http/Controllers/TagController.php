@@ -57,15 +57,20 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $tag = Tag::findOrFail($id);
         $data = $request->validate([
             "name"=>"required|string|max:255"
+
         ]);
+
         $tag->name = $data["name"];
+        $tag->save();
         return redirect('/tag/list')->with('success','Tag updated successfully');
-    }
+
+    } 
+
 
     /**
      * Remove the specified resource from storage.

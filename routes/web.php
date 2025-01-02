@@ -53,4 +53,4 @@ Route::get('/tag/list',[TagController::class,'index'])->name('tag.index');
 Route::delete('/tag/{id}/delete',action: [TagController::class,'destroy'])->name('tag.delete');
 //edit tag
 Route::get('/tag/{id}/edit',[TagController::class,'edit'])->name('tag.edit');
-Route::put('/tag/{id}/edit',[TagController::class,'update'])->name('tag.update');
+Route::put('/tag/{id}',[TagController::class,'update'])->name('tag.update');
